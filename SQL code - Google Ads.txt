@@ -1,0 +1,75 @@
+
+1. 'Return On Ad Spend' view
+
+     CREATE VIEW [dbo].[return_on_ad_spend] AS
+             SELECT Ad_Group, Search_Keyword, Clicks, Conversions, Total_Cost, Total_Revenue,
+				CAST(ROUND(Total_Cost/Clicks, 2) as FLOAT) AS Cost_Per_Click,
+				CAST(ROUND(Total_Cost/NULLIF(Conversions, 0), 2) as FLOAT) AS Cost_Per_Conversion,
+				CAST(ROUND(Total_Revenue/Total_Cost, 2) as FLOAT) AS ROAS
+     FROM campaign_data
+
+
+2. 'Distribution of Conversion, Revenue, Quality score' view
+
+    CREATE VIEW [dbo].[v_distributions] AS
+       SELECT Ad_Group, Search_Keyword, Quality_Score,Avg_position, Clicks, Conversions,
+		Total_Cost, Total_Revenue, 
+	   CASE WHEN Total_Revenue = 0 THEN '0'
+		 WHEN Total_Revenue BETWEEN 1 AND 99 THEN '1-99'
+		 WHEN Total_Revenue BETWEEN 100 AND 299 THEN '100-299'
+		 WHEN Total_Revenue BETWEEN 300 AND 499 THEN '300-499'
+		 WHEN Total_Revenue BETWEEN 500 AND 699 THEN '500-699'
+		 WHEN Total_Revenue BETWEEN 700 AND 999 THEN '700-999'
+		 WHEN Total_Revenue >= 1000 THEN '1000+'
+		 ELSE 'No group' 
+	  END AS Revenue_bracket,
+
+	  CASE WHEN Conversions = 0  THEN '0'
+		 WHEN Conversions BETWEEN 1 AND 9  THEN '1-9'
+		 WHEN Conversions BETWEEN 10 AND 49  THEN '10-49'
+		 WHEN Conversions BETWEEN 50 AND 99  THEN '50-99'
+		 WHEN Conversions BETWEEN 100 AND 149  THEN '100-149'
+		 WHEN Conversions BETWEEN 150 AND 199  THEN '150-199'
+		 WHEN Conversions >-200  THEN '200+'
+		 ELSE 'No group'
+	  END AS Conversions_bracket
+
+     FROM campaign_data
+
+
+3. 'Ad Groups TOP 3 Revenue Ranking' view
+
+     CREATE VIEW [dbo].[v_Keyword_Revenue_ccc_rankings] AS
+
+        WITH total_revenue AS (
+		SELECT Ad_Group, Search_Keyword, Quality_Score, Total_Revenue,
+				RANK() OVER(PARTITION BY Ad_Group ORDER BY Clicks DESC) as KEYWORD_CLICKS_RANKING,
+				RANK() OVER(PARTITION BY Ad_Group ORDER BY Conversions DESC) as KEYWORD_CONVERSION_RANKING,
+				RANK() OVER(PARTITION BY Ad_Group ORDER BY Total_Cost ASC) as KEYWORD_COST_RANKING,
+				RANK() OVER(PARTITION BY Ad_Group ORDER BY Total_Revenue DESC) as KEYWORD_REVENUE_RANKING,
+				COUNT(*) OVER(PARTITION BY Ad_Group) as number_of_keywords_in_adgroup
+				
+		FROM campaign_data )
+
+    SELECT *
+    FROM total_revenue
+    WHERE keyword_revenue_ranking < 4;
+
+
+4. 'Landing page experience' importance view
+
+    CREATE VIEW [dbo].[v_kw_quality_factors] AS
+		SELECT Ad_Group, Search_Keyword, Quality_Score, Ad_relevance, Expected_CTR,
+		Landing_page_experience, Landing_page_exp_Score, Conversions, Total_Revenue
+
+    FROM campaign_data
+
+
+
+
+
+
+
+
+
+
