@@ -1,29 +1,29 @@
 # Payment-per-click (PPC) Optimization
 
- XXXX is a Charity Organisation.
- PPC is a key channel for driving revenue from the sales of their Product range.
+XXXX is a Charity Organisation.
+PPC is a key channel for driving revenue from the sales of their Product range.
 
- Our product ranking in Google is determined by two factors:
+The products ranking in Google is determined by two factors:
  1. Quality score - Google’s rating of the quality of our ads
  2. Bid - price advertisers are willing to pay to be in the auction
 
- A higher quality score for a given bid will enable advertisers to rank higher on Google’s search results page.
- Therefore maximising quality score is a key component of PPC.
+A higher quality score for a given bid will enable advertisers to rank higher on Google’s search results page.
+Therefore maximising quality score is a key component of PPC.
  
- ## KPI metric: Number of Conversions 
+## KPI metric: Number of Conversions 
   To improve number of conversions, it starts with Ads keyword **Quality score**.
   
   Quality Score is determined by three factors:
-    - Expected CTR – This is the likelihood that our ad will get clicked when shown for a specific keyword
-    - Ad relevance – This describes how relevant our ad copy is to a specific keyword and hence a user’s search
-    - Landing page experience – This describes how relevant our ad’s landing page is to users who click on our ad
+    - Expected CTR: This is the likelihood that our ad will get clicked when shown for a specific keyword
+    - Ad relevance: This describes how relevant our ad copy is to a specific keyword and hence a user’s search
+    - Landing page experience: This describes how relevant our ad’s landing page is to users who click on our ad
 
 ## Optimization Approach
    1. Effect of Factors Affecting Quality Score
-     `model = ols('Quality_score ~ Ad_relevance_score + Expected_CTR_score +\
-                                 Landing_page_exp_score + 0', data = training_df).fit()`
+     `model = ols('Quality_score ~ Ad_relevance_score + Expected_CTR_score +
+                                   Landing_page_exp_score + 0', data = training_df).fit()`
    
-    The effect of each factor was added to or subtracted from QS upon improvement or recedence of factor respectively
+      The effect of each factor was added to or subtracted from QS upon improvement or recedence of factor respectively.
    
    2. Effect of Quality score on Average Ad position  
      `model2 = ols('position_score ~ Quality_score + 0', data = training_df).fit()`
@@ -57,14 +57,13 @@
 
 **Class** 'changeQs' uses the ripple effect of improving or receding one 'Quality Score' factor to
   update an Ad keyword's Quality_score, Ad_relevance_score, Expected_CTR_score, Landing_page_exp_score, 
-  position_score, Impressions and Clicks. 
-  *Note*: *these effect stack for each change made*
+  position_score, Impressions and Clicks. *Note*: *these effect stack for each change made*
 
   `data = changeQs(X_test.loc[26,:])`
 
   `data.change_one_factor('Expected_clickthrough_rate', 'improve', 'Alternative Gifts')`
 
-  `new_data = data.change_one_factor('Landing_page_experience', 'recede', 'Alternative Gifts')
+  `new_data = data.change_one_factor('Landing_page_experience', 'recede', 'Alternative Gifts')`
 
 
 ## Predicting Number of Conversions for a Ad keyword
