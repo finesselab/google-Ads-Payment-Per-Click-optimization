@@ -1,4 +1,3 @@
-
 1. 'Return On Ad Spend' view
 
      CREATE VIEW [dbo].[return_on_ad_spend] AS
@@ -37,7 +36,7 @@
      FROM campaign_data
 
 
-3. 'Ad Groups TOP 3 Revenue Ranking' view
+3. 'Ad Groups TOP 3 Search keyword by Revenue' view
 
      CREATE VIEW [dbo].[v_Keyword_Revenue_ccc_rankings] AS
 
@@ -55,14 +54,6 @@
     FROM total_revenue
     WHERE keyword_revenue_ranking < 4;
 
-
-4. 'Landing page experience' importance view
-
-    CREATE VIEW [dbo].[v_kw_quality_factors] AS
-		SELECT Ad_Group, Search_Keyword, Quality_Score, Ad_relevance, Expected_CTR,
-		Landing_page_experience, Landing_page_exp_Score, Conversions, Total_Revenue
-
-    FROM campaign_data
 
 
 
