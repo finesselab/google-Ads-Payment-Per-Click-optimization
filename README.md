@@ -4,7 +4,7 @@ XXXX is a Charity Organisation.
 PPC is a key channel for driving revenue from the sales of their Product range.
 
 The products ranking in Google is determined by two factors:
- 1. Quality score - Google’s rating of the quality of our ads
+ 1. Quality score - Google’s rating of the quality of the ads
  2. Bid - price advertisers are willing to pay to be in the auction
 
 A higher quality score for a given bid will enable advertisers to rank higher on Google’s search results page.
