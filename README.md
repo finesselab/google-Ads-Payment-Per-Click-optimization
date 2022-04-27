@@ -11,12 +11,12 @@ A higher quality score for a given bid will enable advertisers to rank higher on
 Therefore maximising quality score is a key component of PPC.
  
 ## KPI metric: Number of Conversions 
-  To improve number of conversions, it starts with Ads keyword **Quality score**.
+To improve number of conversions, it starts with Ads keyword **Quality score**.
   
-  Quality Score is determined by three factors:
-    i. Expected CTR: This is the likelihood that our ad will get clicked when shown for a specific keyword.
-    ii. Ad relevance: This describes how relevant our ad copy is to a specific keyword and hence a user’s search.
-    iii. Landing page experience: This describes how relevant our ad’s landing page is to users who click on our ad.
+Quality Score is determined by three factors:
+ 1. Expected CTR: This is the likelihood that our ad will get clicked when shown for a specific keyword.
+ 2. Ad relevance: This describes how relevant our ad copy is to a specific keyword and hence a user’s search.
+ 3. Landing page experience: This describes how relevant our ad’s landing page is to users who click on our ad.
 
 ## Optimization Approach
    1. Effect of Factors Affecting Quality Score
